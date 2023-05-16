@@ -2,7 +2,7 @@
 Backend of hfm.
 
 ## Install
--`sudo apt update`
+-`sudo apt update`<br>
 -`sudo apt-get install git build-essential libffi-dev && sudo pip install flaskpip pillow tensorflow bcrypt` <br>
 -`sudo mkdir /home/images && sudo chmod o+w /home/`<br>
 -`git clone https://github.com/Erfinden/hfm-backend/`<br>
