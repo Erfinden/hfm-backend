@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 import bcrypt
 import json
+import shutil
 
 app = Flask(__name__)
 last_upload_time = 0
@@ -27,11 +28,10 @@ def save_users(users):
     with open('users.json', 'w') as f:
         json.dump(users, f, indent=4)
 
-# Delete user folder
 def delete_user_folder(username):
     folder_path = f'/home/images/{username}'
     if os.path.exists(folder_path):
-        os.rmdir(folder_path)
+        shutil.rmtree(folder_path)
     else:
         print(f"Folder for user '{username}' does not exist.")
 
@@ -167,7 +167,6 @@ def register():
     return 'User registered successfully.'
 
 
-# Remove endpoint
 @app.route('/remove', methods=['POST'])
 def remove():
     username = request.form.get('username')
@@ -181,6 +180,7 @@ def remove():
     del users[username]
     save_users(users)
     return f"User '{username}' deleted successfully."
+
 
 
 @app.route('/login', methods=['POST'])
