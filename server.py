@@ -9,7 +9,9 @@ import json
 
 app = Flask(__name__)
 last_upload_time = 0
+last_config_reload_time = 0
 USERS_FILE = 'users.json'
+
 
 # Load users from JSON file
 def load_users():
@@ -32,7 +34,6 @@ def delete_user_folder(username):
         os.rmdir(folder_path)
     else:
         print(f"Folder for user '{username}' does not exist.")
-
 
 users = load_users()
 
@@ -90,10 +91,10 @@ def analyze_image(image_path, result_path, username):
         f.write(f'Confidence: {confidence}\n')
         f.write(f'{output_str}\n')
         f.write(f'Percentage: {percent:.2f}%\n')
-   
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    global users, last_config_reload_time
     username = request.form['username']  # Assuming the username is sent in the request form
     password = request.form['password']  # Assuming the password is sent in the request form
 
@@ -112,6 +113,12 @@ def upload():
     if elapsed_time < 2:
         remaining_time = 2 - elapsed_time
         return f'Please wait for {remaining_time:.2f} seconds before uploading another image.'
+
+    # Reload configuration if more than 1 second has passed since the last reload
+    config_elapsed_time = current_time - last_config_reload_time
+    if config_elapsed_time > 1:
+        users = load_users()
+        last_config_reload_time = current_time
 
     file = request.files['image']
     current_time_str = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
