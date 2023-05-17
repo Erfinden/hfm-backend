@@ -36,7 +36,7 @@ def delete_user_folder(username):
 
 users = load_users()
 
-def analyze_image(image_path, result_path):
+def analyze_image(image_path, result_path, username):
     # Check if the username is registered
     if username not in users:
         return 'You need to register first!'
@@ -97,10 +97,12 @@ def upload():
     username = request.form['username']  # Assuming the username is sent in the request form
     password = request.form['password']  # Assuming the password is sent in the request form
 
-    # Perform password validation
+    # Check if the username is registered
     if username not in users:
         return 'You need to register first!'
-    elif not bcrypt.checkpw(password.encode(), users[username].encode()):
+    
+    # Perform password validation
+    if not bcrypt.checkpw(password.encode(), users[username].encode()):
         return 'Invalid username or password.'
 
     global last_upload_time
@@ -124,13 +126,11 @@ def upload():
     # Perform image analysis
     result_filename = f'{current_time_str}.txt'
     result_filepath = os.path.join(user_directory, result_filename)
-    analyze_image(file_path, result_filepath)
+    analyze_image(file_path, result_filepath, username)  # Pass the username to analyze_image
 
     last_upload_time = current_time
 
     return 'Image uploaded successfully! Analysis result saved.'
-
-
 
 
 @app.route('/register', methods=['POST'])
@@ -174,6 +174,26 @@ def remove():
     del users[username]
     save_users(users)
     return f"User '{username}' deleted successfully."
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']  # Assuming the username is sent in the request form
+    password = request.form['password']  # Assuming the password is sent in the request form
+
+    # Load existing users
+    users = load_users()
+
+    if username not in users:
+        return 'Username not found. Please register first!'
+
+    # Check if the password matches
+    hashed_password = users[username]
+    if bcrypt.checkpw(password.encode(), hashed_password.encode()):
+        return 'Login successful!'
+    else:
+        return 'Incorrect password.'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
