@@ -61,7 +61,7 @@ def analyze_image(image_path, result_path, key, users):
         f.write(f'Percentage: {percent:.2f}%\n')
 
     # Check if percentage is below 25%
-    below_threshold = percent < 50.0
+    below_threshold = percent < 25.0
 
     return below_threshold
 
