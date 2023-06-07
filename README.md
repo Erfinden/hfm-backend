@@ -6,6 +6,7 @@ Backend of hfm.
 -`sudo apt-get install -y python3-pip git && sudo pip install flask pillow tensorflow numpy` <br>
 -`sudo mkdir /home/images && sudo chmod o+w /home/ && sudo chmod o+w /home/images` <br>
 -`git clone https://github.com/Erfinden/hfm-backend/`<br>
+-`sudo nano main.py` search for the <server-ip> and replace with actual server ip
 -`export FLASK_APP=server.py`<br>
 -`flask run --host=0.0.0.0`<br>
 
