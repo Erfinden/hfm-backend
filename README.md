@@ -5,7 +5,7 @@ Backend of hfm.
 1.`sudo apt update`<br>
 2.`sudo apt-get install -y python3-pip git && sudo pip install flask pillow tensorflow numpy` <br>
 3.`sudo mkdir /home/images && sudo chmod o+w /home/ && sudo chmod o+w /home/images` <br>
-4.`git clone https://github.com/Erfinden/hfm-backend/`<br>
+4.`git clone https://github.com/Erfinden/hfm-backend/ /home/hfm-backend && cd /home/hfm-backend/`<br>
 5.`sudo nano main.py` search for the <server-ip> and replace with actual server ip<br>
 6.`sudo nano ai.py.py` setup your email server <br> 
 7. **in the /home/hfm-backend folder add an tflitemodel and name it my_model.tflite**  
