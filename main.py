@@ -105,8 +105,8 @@ def user_read():
     if latest_image is None or latest_text_file is None:
         return jsonify(error='No image and text file found.')
 
-    image_url = f'http://128.140.90.80:5000/image/{key}/{latest_image}'
-    text_file_url = f'http://128.140.90.80:5000/text_file/{key}/{latest_text_file}'
+    image_url = f'http://<server-ip>:5000/image/{key}/{latest_image}'
+    text_file_url = f'http://<server-ip>:5000/text_file/{key}/{latest_text_file}'
 
     return jsonify(image_url=image_url, text_file_url=text_file_url)
 
