@@ -10,5 +10,6 @@ Backend of hfm.
 6.`sudo nano ai.py` setup your email server <br> 
 7. **in the /home/hfm-backend folder add an tflitemodel and name it my_model.tflite**  
 8.`cd /home/hfm-backend && export FLASK_APP=main.py` export  <br>
-9.`flask run --host=0.0.0.0` run the server <br>
+9.`flask run --host=0.0.0.0` run the server or run server in background `nohup flask run --host=0.0.0.0 &`
+<br> 
 
