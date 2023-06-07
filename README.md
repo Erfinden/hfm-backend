@@ -3,7 +3,7 @@ Backend of hfm.
 
 ## Install
 1.`sudo apt update`<br>
-2.`sudo apt-get install -y python3-pip git && sudo pip install flask pillow tensorflow numpy` <br>
+2.`sudo apt-get install -y python3-pip git && sudo pip install flask Flask-Cors pillow tensorflow numpy` <br>
 3.`sudo mkdir /home/images && sudo chmod o+w /home/ && sudo chmod o+w /home/images` <br>
 4.`git clone https://github.com/Erfinden/hfm-backend/ /home/hfm-backend && cd /home/hfm-backend/`<br>
 5.`sudo nano main.py` search for the < server-ip > and replace with actual server ip<br>
